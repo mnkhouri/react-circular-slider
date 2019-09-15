@@ -1,0 +1,44 @@
+{
+  "name": "react-circular-slider",
+  "version": "1.0.0",
+  "description": "A circular slider React component",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublishOnly": "npm test && npm run build && npm run build-docs",
+    "test": "eslint src/** && prettier --check src/**",
+    "build": "rm -rf ./dist && prettier --write src/** && tsc",
+    "build-docs": "rm -rf ./docs/build && prettier --write docs/** && webpack",
+    "watch-docs": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnkhouri/react-circular-slider.git"
+  },
+  "author": "Marc Khouri <github@khouri.ca>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mnkhouri/react-circular-slider/issues"
+  },
+  "homepage": "https://github.com/mnkhouri/react-circular-slider#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "prettier": "^1.18.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "ts-loader": "^6.1.0",
+    "typescript": "^3.6.3",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "peerDependencies": {
+    "react": ">=15.0.0"
+  }
+}
