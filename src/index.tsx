@@ -352,3 +352,5 @@ export class CircularSliderWithChildren extends React.Component<Props> {
     );
   }
 }
+
+export default CircularSlider;

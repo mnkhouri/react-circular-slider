@@ -5,10 +5,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepublishOnly": "npm test && npm run build && npm run build-docs",
+    "prepublishOnly": "npm test && npm run build",
     "test": "eslint src/** && prettier --check src/**",
-    "build": "rm -rf ./dist && prettier --write src/** && tsc",
-    "build-docs": "rm -rf ./docs/build && prettier --write docs/** && webpack",
+    "build": "rm -rf ./dist ./docs/build && prettier --write src/** docs/** && webpack && tsc",
     "watch-docs": "webpack-dev-server"
   },
   "repository": {
@@ -25,6 +24,7 @@
   "devDependencies": {
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/react-syntax-highlighter": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "eslint": "^6.4.0",
@@ -32,6 +32,7 @@
     "prettier": "^1.18.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-syntax-highlighter": "^11.0.2",
     "ts-loader": "^6.1.0",
     "typescript": "^3.6.3",
     "webpack": "^4.40.2",
