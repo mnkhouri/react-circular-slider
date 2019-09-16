@@ -16,6 +16,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublishOnly": "npm test && npm run build",
+    "postpublish": "PACKAGE_VERSION=$(echo 'const p = require(\"./package.json\"); process.stdout.write(p.version)' | node) && git tag v$PACKAGE_VERSION && git push --tags",
     "test": "eslint src/** && prettier --check src/**",
     "build": "rm -rf ./dist ./docs/build && prettier --write src/** docs/** && webpack && tsc",
     "watch-docs": "webpack-dev-server"
