@@ -14,6 +14,8 @@ A full-featured circular slider React component, with full TypeScript definition
 
 ## Example
 
+Install [from npm](https://www.npmjs.com/package/react-circular-slider-svg): `npm i react-circular-slider-svg`
+
 ```typescript
 import CircularSlider from "react-circular-slider-svg";
 
