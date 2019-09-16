@@ -55,7 +55,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run build"
+      "pre-commit": "STATUS=$(git status); npm run build && ([ \"$(git status)\" == \"$STATUS\" ] || (echo 'git status changed!' && exit 1))"
     }
   }
 }
