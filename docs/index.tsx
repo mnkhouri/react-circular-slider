@@ -2,9 +2,10 @@ import { default as React, useState } from "react";
 import ReactDOM from "react-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { prism as syntaxStyle } from "react-syntax-highlighter/dist/esm/styles/prism";
+
 import { CircularSlider, CircularSliderWithChildren } from "../src";
 
-type SliderProps = React.ComponentProps<typeof CircularSliderWithChildren>;
+import { ApiDocs } from "./api";
 
 class Main extends React.Component {
   render() {
@@ -21,6 +22,10 @@ class Main extends React.Component {
             opts={{ minValue: 15, maxValue: 30 }}
           />
           <Example title="Arc color #00ff00" opts={{ arcColor: "#00ff00" }} />
+          <Example
+            title="Start angle: 120, end angle: 300"
+            opts={{ startAngle: 120, endAngle: 300 }}
+          />
         </div>
       </div>
     );
@@ -80,92 +85,45 @@ const MyApp = () => {
   );
 };
 
-const ApiDocs: React.FunctionComponent = () => {
+type SliderProps = React.ComponentProps<typeof CircularSliderWithChildren>;
+type ExampleProps = { opts?: Partial<SliderProps>; title: string };
+const Example: React.FunctionComponent<ExampleProps> = props => {
+  const [value1, setValue1] = useState(20);
+  const [value2, setValue2] = useState(60);
+  const [showConfig, setShowConfig] = useState(false);
+  const { opts, title } = props;
+  const config = {
+    arcColor: "#690",
+    ...opts,
+    handle1: {
+      value: value1,
+      onChange: (v: number) => setValue1(v)
+    }
+  };
+
   return (
-    <>
-      <h3>API:</h3>
-      <SyntaxHighlighter language="tsx" style={syntaxStyle}>
-        {`type Props = {
-  size: number; // width and height of slider
-  minValue: number;
-  maxValue: number;
-  startAngle: number; // 0 - 360 degrees
-  endAngle: number; // 0 - 360 degrees
-  angleType: {
-    direction: "cw" | "ccw";
-    axis: "+x" | "-x" | "+y" | "-y";
-  };
-  handleSize?: number;
-  handle1: {
-    value: number;
-    onChange?: (value: number) => void;
-  };
-  handle2?: {
-    value: number;
-    onChange: (value: number) => void;
-  };
-  disabled?: boolean;
-  arcColor: string;
-  arcBackgroundColor?: string;
-  coerceToInt?: boolean;
-  outerShadow?: boolean;
-};
-`}
-      </SyntaxHighlighter>
-    </>
+    <div
+      style={{
+        flexShrink: 0,
+        width: 300,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}
+    >
+      {title}
+      <CircularSliderWithChildren {...config}>
+        Slider value: {value1.toFixed()}
+        <button onClick={() => setShowConfig(!showConfig)}>Show props</button>
+      </CircularSliderWithChildren>
+      {showConfig && (
+        <SyntaxHighlighter language="javascript" style={syntaxStyle}>
+          {JSON.stringify(config, null, 2)}
+        </SyntaxHighlighter>
+      )}
+    </div>
   );
 };
-
-type ExampleProps = { opts?: Partial<SliderProps>; title: string };
-type ExampleState = { value: number; showConfig: boolean };
-
-class Example extends React.Component<ExampleProps, ExampleState> {
-  constructor(props: ExampleProps) {
-    super(props);
-    this.state = {
-      value: 20,
-      showConfig: false
-    };
-  }
-
-  render() {
-    const { showConfig, value } = this.state;
-    const { opts, title } = this.props;
-    const config = {
-      size: 200,
-      arcColor: "#690",
-      ...opts,
-      handle1: {
-        value: this.state.value,
-        onChange: (v: number) => this.setState({ value: v })
-      }
-    };
-    return (
-      <div
-        style={{
-          flexShrink: 0,
-          width: config.size + 100,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        }}
-      >
-        {title}
-        <CircularSliderWithChildren {...config}>
-          Slider value: {value.toFixed()}
-          <button onClick={() => this.setState({ showConfig: !showConfig })}>
-            Show config
-          </button>
-        </CircularSliderWithChildren>
-        {showConfig && (
-          <SyntaxHighlighter language="javascript" style={syntaxStyle}>
-            {JSON.stringify(config, null, 2)}
-          </SyntaxHighlighter>
-        )}
-      </div>
-    );
-  }
-}
 
 const domContainer = document.querySelector("#main");
 ReactDOM.render(<Main />, domContainer);
