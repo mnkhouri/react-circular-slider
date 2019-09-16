@@ -1,6 +1,6 @@
 {
-  "name": "react-circular-slider",
-  "version": "1.0.0",
+  "name": "react-circular-slider-svg",
+  "version": "0.1.1",
   "description": "A circular slider React component",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,6 +29,7 @@
     "@typescript-eslint/parser": "^2.2.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
+    "husky": "^3.0.5",
     "prettier": "^1.18.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -41,5 +42,10 @@
   },
   "peerDependencies": {
     "react": ">=15.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm build"
+    }
   }
 }

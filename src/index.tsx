@@ -15,7 +15,7 @@ type Props = {
   startAngle: number; // 0 - 360 degrees
   endAngle: number; // 0 - 360 degrees
   angleType: AngleDescription;
-  handleSize?: number;
+  handleSize: number;
   handle1: {
     value: number;
     onChange?: (value: number) => void;
@@ -26,12 +26,35 @@ type Props = {
   };
   disabled?: boolean;
   arcColor: string;
-  arcBackgroundColor?: string;
+  arcBackgroundColor: string;
   coerceToInt?: boolean;
   outerShadow?: boolean;
 };
 
 export class CircularSlider extends React.Component<Props> {
+  static defaultProps: Pick<
+    Props,
+    | "size"
+    | "minValue"
+    | "maxValue"
+    | "startAngle"
+    | "endAngle"
+    | "angleType"
+    | "arcBackgroundColor"
+    | "handleSize"
+  > = {
+    size: 200,
+    minValue: 0,
+    maxValue: 100,
+    startAngle: 0,
+    endAngle: 360,
+    angleType: {
+      direction: "cw",
+      axis: "-y"
+    },
+    handleSize: 8,
+    arcBackgroundColor: "#aaa"
+  };
   svgRef = React.createRef<SVGSVGElement>();
 
   onMouseEnter = (ev: React.MouseEvent<SVGSVGElement>) => {
@@ -122,7 +145,7 @@ export class CircularSlider extends React.Component<Props> {
       size,
       handle1,
       handle2,
-      handleSize = 8,
+      handleSize,
       maxValue,
       minValue,
       startAngle,
@@ -130,9 +153,9 @@ export class CircularSlider extends React.Component<Props> {
       angleType,
       disabled,
       arcColor,
+      arcBackgroundColor,
       outerShadow
     } = this.props;
-    const arcBackgroundColor = this.props.arcBackgroundColor || "#fff";
     const trackWidth = 4;
     const shadowWidth = 20;
     const trackInnerRadius = size / 2 - trackWidth - shadowWidth;
@@ -322,6 +345,7 @@ export class CircularSlider extends React.Component<Props> {
 }
 
 export class CircularSliderWithChildren extends React.Component<Props> {
+  static defaultProps = CircularSlider.defaultProps;
   render() {
     const { size } = this.props;
     return (

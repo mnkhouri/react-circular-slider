@@ -1,21 +1,10 @@
-import * as React from "react";
+import { default as React, useState } from "react";
 import ReactDOM from "react-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { prism as syntaxStyle } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CircularSlider, CircularSliderWithChildren } from "../src";
 
 type SliderProps = React.ComponentProps<typeof CircularSliderWithChildren>;
-
-const defaultOpts = {
-  size: 200,
-  minValue: 0,
-  maxValue: 100,
-  startAngle: 40,
-  endAngle: 320,
-  angleType: { direction: "cw" as const, axis: "-y" as const },
-  arcColor: "#690",
-  arcBackgroundColor: "#aaa"
-};
 
 class Main extends React.Component {
   render() {
@@ -39,66 +28,52 @@ class Main extends React.Component {
 }
 
 const HeadlineExample: React.FunctionComponent = () => {
-  class MyApp extends React.Component {
-    state = {
-      value: 20
-    };
+  const MyApp: React.FunctionComponent = () => {
+    const [value1, setValue1] = useState(20);
+    const [value2, setValue2] = useState(60);
 
-    render() {
-      return (
-        <CircularSlider
-          size={200}
-          minValue={0}
-          maxValue={100}
-          startAngle={40}
-          endAngle={320}
-          angleType={{
-            direction: "cw",
-            axis: "-y"
-          }}
-          handle1={{
-            value: this.state.value,
-            onChange: v => this.setState({ value: v })
-          }}
-          arcColor="#690"
-          arcBackgroundColor="#aaa"
-        />
-      );
-    }
-  }
+    return (
+      <CircularSlider
+        handle1={{
+          value: value1,
+          onChange: v => setValue1(v)
+        }}
+        handle2={{
+          value: value2,
+          onChange: v => setValue2(v)
+        }}
+        arcColor="#690"
+        startAngle={40}
+        endAngle={320}
+      />
+    );
+  };
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       <div style={{ width: 200, flexShrink: 0 }}>
         <MyApp />
       </div>
-      <SyntaxHighlighter language="typescript" style={syntaxStyle}>
-        {`import CircularSlider from 'react-circular-slider';
+      <SyntaxHighlighter language="tsx" style={syntaxStyle}>
+        {`import CircularSlider from 'react-circular-slider-svg';
 
-class MyApp extends React.Component {
-  state = {
-    value: 20
-  }
+const MyApp = () => {
+  const [value1, setValue1] = useState(20);
+  const [value2, setValue2] = useState(60);
 
-  render() {
-    return <CircularSlider
-      size={200}
-      minValue={0}
-      maxValue={100}
-      startAngle={40}
-      endAngle={320}
-      angleType={{
-        direction: "cw",
-        axis: "-y"
-      }}
+  return (
+    <CircularSlider
       handle1={{
-        value: this.state.value,
-        onChange: v => this.setState({ value: v })
+        value: value1,
+        onChange: v => setValue1(v)
+      }}
+      handle2={{
+        value: value2,
+        onChange: v => setValue2(v)
       }}
       arcColor="#690"
-      arcBackgroundColor="#aaa"
     />
-  }
-}
+  );
+};
 `}
       </SyntaxHighlighter>
     </div>
@@ -109,7 +84,7 @@ const ApiDocs: React.FunctionComponent = () => {
   return (
     <>
       <h3>API:</h3>
-      <SyntaxHighlighter language="typescript" style={syntaxStyle}>
+      <SyntaxHighlighter language="tsx" style={syntaxStyle}>
         {`type Props = {
   size: number; // width and height of slider
   minValue: number;
@@ -156,12 +131,13 @@ class Example extends React.Component<ExampleProps, ExampleState> {
   render() {
     const { showConfig, value } = this.state;
     const { opts, title } = this.props;
-    const config: SliderProps = {
-      ...defaultOpts,
+    const config = {
+      size: 200,
+      arcColor: "#690",
       ...opts,
       handle1: {
         value: this.state.value,
-        onChange: v => this.setState({ value: v })
+        onChange: (v: number) => this.setState({ value: v })
       }
     };
     return (
