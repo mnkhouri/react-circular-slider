@@ -15,7 +15,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepublishOnly": "npm test && npm run build && (git diff-index --quiet HEAD -- || (echo \\\\n\\\\nuntracked changes, exiting!\\\\n\\\\n && exit 1))",
+    "prepublishOnly": "npm test && npm run build && sleep 3 && (test -z \"$(git status --porcelain)\" || (echo \\\\n\\\\nuntracked changes, exiting! && git status --porcelain && exit 1))",
     "postpublish": "PACKAGE_VERSION=$(echo 'const p = require(\"./package.json\"); process.stdout.write(p.version)' | node) && git tag v$PACKAGE_VERSION && git push --tags",
     "test": "eslint src/** && prettier --check src/**",
     "build": "rm -rf ./dist ./docs/build && prettier --write src/** docs/** && webpack && tsc",
