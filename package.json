@@ -2,6 +2,16 @@
   "name": "react-circular-slider-svg",
   "version": "0.1.1",
   "description": "A circular slider React component",
+  "keywords": [
+    "react",
+    "circular",
+    "circle",
+    "round",
+    "arc",
+    "slider",
+    "input",
+    "svg"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
