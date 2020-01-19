@@ -6,6 +6,7 @@ import { prism as syntaxStyle } from "react-syntax-highlighter/dist/esm/styles/p
 import { CircularSlider, CircularSliderWithChildren } from "../src";
 
 import { ApiDocs } from "./api";
+import { OnControlFinishedExample } from "./onControlFinished";
 
 class Main extends React.Component {
   render() {
@@ -27,6 +28,12 @@ class Main extends React.Component {
             opts={{ startAngle: 120, endAngle: 300 }}
           />
         </div>
+        <h3>Take action when user is done:</h3>
+        You can use the "onControlFinished" prop to pass a function that will be
+        called when the user finishes their control (i.e. onMouseUp or
+        onMouseLeave). You could use this callback, for example, to write the
+        final value of the control to a database.
+        <OnControlFinishedExample />
       </div>
     );
   }
@@ -76,6 +83,8 @@ const MyApp = () => {
         onChange: v => setValue2(v)
       }}
       arcColor="#690"
+      startAngle={40}
+      endAngle={320}
     />
   );
 };

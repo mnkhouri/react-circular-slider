@@ -24,6 +24,7 @@ type Props = {
     value: number;
     onChange: (value: number) => void;
   };
+  onControlFinished?: () => void;
   disabled?: boolean;
   arcColor: string;
   arcBackgroundColor: string;
@@ -80,6 +81,9 @@ export class CircularSlider extends React.Component<Props> {
       svgRef.removeEventListener("mousemove", this.processSelection);
       svgRef.removeEventListener("mouseleave", this.removeMouseListeners);
       svgRef.removeEventListener("mouseup", this.removeMouseListeners);
+    }
+    if (this.props.onControlFinished) {
+      this.props.onControlFinished();
     }
   };
 

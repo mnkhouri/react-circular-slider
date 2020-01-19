@@ -12,13 +12,17 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: "ts-loader"
+        loader: "ts-loader",
+        options: {
+          compilerOptions: {
+            declaration: false
+          }
+        }
       }
     ]
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"]
   },
-  devServer: {
-  }
+  devServer: {}
 };

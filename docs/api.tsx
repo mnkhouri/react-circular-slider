@@ -90,6 +90,14 @@ export const ApiDocs: React.FunctionComponent = () => {
       description: ""
     },
     {
+      name: "onControlFinished",
+      required: false,
+      default: "",
+      type: "( ) => void",
+      description:
+        "Called when the user is done controlling (i.e. mouseUp / mouseLeave)"
+    },
+    {
       name: "handle1",
       required: false,
       default: "",
