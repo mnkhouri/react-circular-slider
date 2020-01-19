@@ -1,6 +1,6 @@
 {
   "name": "react-circular-slider-svg",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A circular slider React component",
   "keywords": [
     "react",
@@ -14,6 +14,9 @@
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "prepublishOnly": "npm test && npm run build && sleep 3 && (test -z \"$(git status --porcelain)\" || (echo \\\\n\\\\nuntracked changes, exiting! && git status --porcelain && exit 1))",
     "postpublish": "PACKAGE_VERSION=$(echo 'const p = require(\"./package.json\"); process.stdout.write(p.version)' | node) && git tag v$PACKAGE_VERSION && git push --tags",
