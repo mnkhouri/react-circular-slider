@@ -7,77 +7,77 @@ export const ApiDocs: React.FunctionComponent = () => {
       required: false,
       default: "",
       type: "number",
-      description: "width and height of slider"
+      description: "width and height of slider",
     },
     {
       name: "minValue",
       required: false,
       default: "",
       type: "number",
-      description: ""
+      description: "",
     },
     {
       name: "maxValue",
       required: false,
       default: "",
       type: "number",
-      description: ""
+      description: "",
     },
     {
       name: "startAngle",
       required: false,
       default: "",
       type: "number",
-      description: "0 - 360 degrees"
+      description: "0 - 360 degrees",
     },
     {
       name: "endAngle",
       required: false,
       default: "",
       type: "number",
-      description: "0 - 360 degrees"
+      description: "0 - 360 degrees",
     },
     {
       name: "handleSize",
       required: false,
       default: "",
       type: "number",
-      description: ""
+      description: "",
     },
     {
       name: "disabled",
       required: false,
       default: "",
       type: "boolean",
-      description: ""
+      description: "",
     },
     {
       name: "arcColor",
       required: false,
       default: "",
       type: "string",
-      description: ""
+      description: "",
     },
     {
       name: "arcBackgroundColor",
       required: false,
       default: "",
       type: "string",
-      description: ""
+      description: "",
     },
     {
       name: "coerceToInt",
       required: false,
       default: "",
       type: "boolean",
-      description: ""
+      description: "",
     },
     {
       name: "outerShadow",
       required: false,
       default: "",
       type: "boolean",
-      description: ""
+      description: "",
     },
     {
       name: "angleType",
@@ -85,9 +85,9 @@ export const ApiDocs: React.FunctionComponent = () => {
       default: "",
       type: {
         direction: ["cw", "ccw"],
-        axis: ["+x", "-x", "+y", "-y"]
+        axis: ["+x", "-x", "+y", "-y"],
       },
-      description: ""
+      description: "",
     },
     {
       name: "onControlFinished",
@@ -95,7 +95,7 @@ export const ApiDocs: React.FunctionComponent = () => {
       default: "",
       type: "( ) => void",
       description:
-        "Called when the user is done controlling (i.e. mouseUp / mouseLeave)"
+        "Called when the user is done controlling (i.e. mouseUp / mouseLeave)",
     },
     {
       name: "handle1",
@@ -103,9 +103,9 @@ export const ApiDocs: React.FunctionComponent = () => {
       default: "",
       type: {
         value: "number",
-        onChange: "(v: number) => void"
+        onChange: "(v: number) => void",
       },
-      description: ""
+      description: "",
     },
     {
       name: "handle2",
@@ -113,10 +113,10 @@ export const ApiDocs: React.FunctionComponent = () => {
       default: "",
       type: {
         value: "number",
-        onChange: "(v: number) => void"
+        onChange: "(v: number) => void",
       },
-      description: ""
-    }
+      description: "",
+    },
   ];
   return (
     <>
@@ -129,7 +129,7 @@ export const ApiDocs: React.FunctionComponent = () => {
           <th>default</th>
           <th>description</th>
         </tr>
-        {props.map(p => (
+        {props.map((p) => (
           <tr key={p.name}>
             <td>{p.name}</td>
             <td>{p.required}</td>

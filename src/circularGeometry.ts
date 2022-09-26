@@ -102,7 +102,7 @@ export function angleToPosition(
   // js functions need radians, counterclockwise from positive x axis
   const angleConverted = convertAngle(angle.degree, angle, {
     direction: "ccw",
-    axis: "+x"
+    axis: "+x",
   });
   const angleInRad = (angleConverted / 180) * Math.PI;
   let dX: number;
@@ -152,7 +152,7 @@ export function positionToAngle(
     degree,
     {
       direction: "ccw",
-      axis: "+x"
+      axis: "+x",
     },
     angleType
   );

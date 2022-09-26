@@ -9,14 +9,14 @@ import { ApiDocs } from "./api";
 export const OnControlFinishedExample: React.FunctionComponent = () => {
   const MyApp: React.FunctionComponent = () => {
     const [value1, setValue1] = useState(20);
-    const [endingValue, setEndingValue] = useState();
+    const [endingValue, setEndingValue] = useState<number>();
 
     return (
       <div>
         <CircularSlider
           handle1={{
             value: value1,
-            onChange: v => setValue1(v)
+            onChange: (v) => setValue1(v),
           }}
           onControlFinished={() => setEndingValue(value1)}
           arcColor="#690"

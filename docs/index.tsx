@@ -48,11 +48,11 @@ const HeadlineExample: React.FunctionComponent = () => {
       <CircularSlider
         handle1={{
           value: value1,
-          onChange: v => setValue1(v)
+          onChange: (v) => setValue1(v),
         }}
         handle2={{
           value: value2,
-          onChange: v => setValue2(v)
+          onChange: (v) => setValue2(v),
         }}
         arcColor="#690"
         startAngle={40}
@@ -96,7 +96,7 @@ const MyApp = () => {
 
 type SliderProps = React.ComponentProps<typeof CircularSliderWithChildren>;
 type ExampleProps = { opts?: Partial<SliderProps>; title: string };
-const Example: React.FunctionComponent<ExampleProps> = props => {
+const Example: React.FunctionComponent<ExampleProps> = (props) => {
   const [value1, setValue1] = useState(20);
   const [value2, setValue2] = useState(60);
   const [showConfig, setShowConfig] = useState(false);
@@ -106,8 +106,8 @@ const Example: React.FunctionComponent<ExampleProps> = props => {
     ...opts,
     handle1: {
       value: value1,
-      onChange: (v: number) => setValue1(v)
-    }
+      onChange: (v: number) => setValue1(v),
+    },
   };
 
   return (
@@ -117,7 +117,7 @@ const Example: React.FunctionComponent<ExampleProps> = props => {
         width: 300,
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
       {title}

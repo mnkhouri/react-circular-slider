@@ -81,14 +81,8 @@ export function arcPathWithRoundedEnds(opts: {
   svgSize: number;
   direction: "cw" | "ccw";
 }) {
-  const {
-    startAngle,
-    innerRadius,
-    thickness,
-    direction,
-    angleType,
-    svgSize
-  } = opts;
+  const { startAngle, innerRadius, thickness, direction, angleType, svgSize } =
+    opts;
   let { endAngle } = opts;
 
   if (startAngle % 360 === endAngle % 360 && startAngle !== endAngle) {

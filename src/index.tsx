@@ -4,7 +4,7 @@ import {
   positionToAngle,
   AngleDescription,
   valueToAngle,
-  angleToValue
+  angleToValue,
 } from "./circularGeometry";
 import { arcPathWithRoundedEnds } from "./svgPaths";
 
@@ -32,7 +32,9 @@ type Props = {
   outerShadow?: boolean;
 };
 
-export class CircularSlider extends React.Component<Props> {
+export class CircularSlider extends React.Component<
+  React.PropsWithChildren<Props>
+> {
   static defaultProps: Pick<
     Props,
     | "size"
@@ -44,18 +46,18 @@ export class CircularSlider extends React.Component<Props> {
     | "arcBackgroundColor"
     | "handleSize"
   > = {
-    size: 200,
-    minValue: 0,
-    maxValue: 100,
-    startAngle: 0,
-    endAngle: 360,
-    angleType: {
-      direction: "cw",
-      axis: "-y"
-    },
-    handleSize: 8,
-    arcBackgroundColor: "#aaa"
-  };
+      size: 200,
+      minValue: 0,
+      maxValue: 100,
+      startAngle: 0,
+      endAngle: 360,
+      angleType: {
+        direction: "cw",
+        axis: "-y",
+      },
+      handleSize: 8,
+      arcBackgroundColor: "#aaa",
+    };
   svgRef = React.createRef<SVGSVGElement>();
 
   onMouseEnter = (ev: React.MouseEvent<SVGSVGElement>) => {
@@ -98,7 +100,7 @@ export class CircularSlider extends React.Component<Props> {
       handle1,
       disabled,
       handle2,
-      coerceToInt
+      coerceToInt,
     } = this.props;
     if (!handle1.onChange) {
       // Read-only, don't bother doing calculations
@@ -124,7 +126,7 @@ export class CircularSlider extends React.Component<Props> {
       minValue,
       maxValue,
       startAngle,
-      endAngle
+      endAngle,
     });
     if (coerceToInt) {
       value = Math.round(value);
@@ -158,7 +160,7 @@ export class CircularSlider extends React.Component<Props> {
       disabled,
       arcColor,
       arcBackgroundColor,
-      outerShadow
+      outerShadow,
     } = this.props;
     const trackWidth = 4;
     const shadowWidth = 20;
@@ -168,7 +170,7 @@ export class CircularSlider extends React.Component<Props> {
       minValue,
       maxValue,
       startAngle,
-      endAngle
+      endAngle,
     });
     const handle2Angle =
       handle2 &&
@@ -177,7 +179,7 @@ export class CircularSlider extends React.Component<Props> {
         minValue,
         maxValue,
         startAngle,
-        endAngle
+        endAngle,
       });
     const handle1Position = angleToPosition(
       { degree: handle1Angle, ...angleType },
@@ -205,28 +207,30 @@ export class CircularSlider extends React.Component<Props> {
           /* TODO: be smarter about this -- for example, we could run this through our
           calculation and determine how close we are to the arc, and use that to decide
           if we propagate the click. */
-          ev => controllable && ev.stopPropagation()
+          (ev) => controllable && ev.stopPropagation()
         }
       >
-        {/* Shadow */
-        outerShadow && (
-          <React.Fragment>
-            <radialGradient id="outerShadow">
-              <stop offset="90%" stopColor={arcColor} />
-              <stop offset="100%" stopColor="white" />
-            </radialGradient>
+        {
+          /* Shadow */
+          outerShadow && (
+            <React.Fragment>
+              <radialGradient id="outerShadow">
+                <stop offset="90%" stopColor={arcColor} />
+                <stop offset="100%" stopColor="white" />
+              </radialGradient>
 
-            <circle
-              fill="none"
-              stroke="url(#outerShadow)"
-              cx={size / 2}
-              cy={size / 2}
-              // Subtract an extra pixel to ensure there's never any gap between slider and shadow
-              r={trackInnerRadius + trackWidth + shadowWidth / 2 - 1}
-              strokeWidth={shadowWidth}
-            />
-          </React.Fragment>
-        )}
+              <circle
+                fill="none"
+                stroke="url(#outerShadow)"
+                cx={size / 2}
+                cy={size / 2}
+                // Subtract an extra pixel to ensure there's never any gap between slider and shadow
+                r={trackInnerRadius + trackWidth + shadowWidth / 2 - 1}
+                strokeWidth={shadowWidth}
+              />
+            </React.Fragment>
+          )
+        }
 
         {handle2Angle === undefined ? (
           /* One-handle mode */
@@ -240,7 +244,7 @@ export class CircularSlider extends React.Component<Props> {
                 innerRadius: trackInnerRadius,
                 thickness: trackWidth,
                 svgSize: size,
-                direction: angleType.direction
+                direction: angleType.direction,
               })}
               fill={arcBackgroundColor}
             />
@@ -253,7 +257,7 @@ export class CircularSlider extends React.Component<Props> {
                 innerRadius: trackInnerRadius,
                 thickness: trackWidth,
                 svgSize: size,
-                direction: angleType.direction
+                direction: angleType.direction,
               })}
               fill={arcColor}
             />
@@ -270,7 +274,7 @@ export class CircularSlider extends React.Component<Props> {
                 innerRadius: trackInnerRadius,
                 thickness: trackWidth,
                 svgSize: size,
-                direction: angleType.direction
+                direction: angleType.direction,
               })}
               fill={arcBackgroundColor}
             />
@@ -283,7 +287,7 @@ export class CircularSlider extends React.Component<Props> {
                 innerRadius: trackInnerRadius,
                 thickness: trackWidth,
                 svgSize: size,
-                direction: angleType.direction
+                direction: angleType.direction,
               })}
               fill={arcBackgroundColor}
             />
@@ -296,59 +300,71 @@ export class CircularSlider extends React.Component<Props> {
                 innerRadius: trackInnerRadius,
                 thickness: trackWidth,
                 svgSize: size,
-                direction: angleType.direction
+                direction: angleType.direction,
               })}
               fill={arcColor}
             />
           </React.Fragment>
         )}
 
-        {/* Handle 1 */
-        controllable && (
-          <React.Fragment>
-            <filter id="handleShadow" x="-50%" y="-50%" width="16" height="16">
-              <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
-              <feColorMatrix
-                result="matrixOut"
-                in="offOut"
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        {
+          /* Handle 1 */
+          controllable && (
+            <React.Fragment>
+              <filter
+                id="handleShadow"
+                x="-50%"
+                y="-50%"
+                width="16"
+                height="16"
+              >
+                <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+                <feColorMatrix
+                  result="matrixOut"
+                  in="offOut"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                />
+                <feGaussianBlur
+                  result="blurOut"
+                  in="matrixOut"
+                  stdDeviation="5"
+                />
+                <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+              </filter>
+              <circle
+                r={handleSize}
+                cx={handle1Position.x}
+                cy={handle1Position.y}
+                fill="#ffffff"
+                filter="url(#handleShadow)"
               />
-              <feGaussianBlur
-                result="blurOut"
-                in="matrixOut"
-                stdDeviation="5"
-              />
-              <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-            </filter>
-            <circle
-              r={handleSize}
-              cx={handle1Position.x}
-              cy={handle1Position.y}
-              fill="#ffffff"
-              filter="url(#handleShadow)"
-            />
-          </React.Fragment>
-        )}
+            </React.Fragment>
+          )
+        }
 
-        {/* Handle 2 */
-        handle2Position && (
-          <React.Fragment>
-            <circle
-              r={handleSize}
-              cx={handle2Position.x}
-              cy={handle2Position.y}
-              fill="#ffffff"
-              filter="url(#handleShadow)"
-            />
-          </React.Fragment>
-        )}
+        {
+          /* Handle 2 */
+          handle2Position && (
+            <React.Fragment>
+              <circle
+                r={handleSize}
+                cx={handle2Position.x}
+                cy={handle2Position.y}
+                fill="#ffffff"
+                filter="url(#handleShadow)"
+              />
+            </React.Fragment>
+          )
+        }
       </svg>
     );
   }
 }
 
-export class CircularSliderWithChildren extends React.Component<Props> {
+export class CircularSliderWithChildren extends React.Component<
+  React.PropsWithChildren<Props>
+> {
   static defaultProps = CircularSlider.defaultProps;
   render() {
     const { size } = this.props;
@@ -357,7 +373,7 @@ export class CircularSliderWithChildren extends React.Component<Props> {
         style={{
           width: size,
           height: size,
-          position: "relative"
+          position: "relative",
         }}
       >
         <CircularSlider {...this.props} />
@@ -371,7 +387,7 @@ export class CircularSliderWithChildren extends React.Component<Props> {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
           }}
         >
           {this.props.children}

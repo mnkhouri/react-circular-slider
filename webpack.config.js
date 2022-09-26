@@ -24,5 +24,12 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js"]
   },
-  devServer: {}
+  devServer: {
+    client: {
+      overlay: true,
+    },
+    static: {
+      directory: path.join(__dirname, 'docs'),
+    },
+  }
 };
