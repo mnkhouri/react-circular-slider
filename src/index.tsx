@@ -383,7 +383,6 @@ export class CircularSliderWithChildren extends React.Component<
             top: "25%",
             left: "50%",
             transform: "translateX(-50%)",
-            width: "60px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
