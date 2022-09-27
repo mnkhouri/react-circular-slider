@@ -46,18 +46,18 @@ export class CircularSlider extends React.Component<
     | "arcBackgroundColor"
     | "handleSize"
   > = {
-      size: 200,
-      minValue: 0,
-      maxValue: 100,
-      startAngle: 0,
-      endAngle: 360,
-      angleType: {
-        direction: "cw",
-        axis: "-y",
-      },
-      handleSize: 8,
-      arcBackgroundColor: "#aaa",
-    };
+    size: 200,
+    minValue: 0,
+    maxValue: 100,
+    startAngle: 0,
+    endAngle: 360,
+    angleType: {
+      direction: "cw",
+      axis: "-y",
+    },
+    handleSize: 8,
+    arcBackgroundColor: "#aaa",
+  };
   svgRef = React.createRef<SVGSVGElement>();
 
   onMouseEnter = (ev: React.MouseEvent<SVGSVGElement>) => {

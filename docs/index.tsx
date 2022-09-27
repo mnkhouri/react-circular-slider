@@ -7,6 +7,7 @@ import { CircularSlider, CircularSliderWithChildren } from "../src";
 
 import { ApiDocs } from "./api";
 import { OnControlFinishedExample } from "./onControlFinished";
+import { WithChildrenExample } from "./withChildren";
 
 class Main extends React.Component {
   render() {
@@ -28,6 +29,10 @@ class Main extends React.Component {
             opts={{ startAngle: 120, endAngle: 300 }}
           />
         </div>
+        <h3>Nest children inside the slider:</h3>
+        You can use "CircularSliderWithChildren" to nest children inside the
+        slider. All props are the same as "CircularSlider".
+        <WithChildrenExample />
         <h3>Take action when user is done:</h3>
         You can use the "onControlFinished" prop to pass a function that will be
         called when the user finishes their control (i.e. onMouseUp or
