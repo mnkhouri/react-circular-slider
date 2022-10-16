@@ -1,13 +1,18 @@
 const path = require("path");
-const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: ["./docs/index.tsx"],
+  entry: ["./docs-src/index.tsx"],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './docs-src/index.html'
+    }),
+  ],
   output: {
-    path: path.join(__dirname, "docs/build"),
-    filename: "index.js",
-    publicPath: "docs/build/"
+    path: path.join(__dirname, "docs"),
+    filename: '[name].bundle.js',
+    clean: true,
   },
   module: {
     rules: [
@@ -28,9 +33,6 @@ module.exports = {
   devServer: {
     client: {
       overlay: true,
-    },
-    static: {
-      directory: path.join(__dirname, 'docs'),
     },
   }
 };
