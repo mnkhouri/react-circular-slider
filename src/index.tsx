@@ -95,6 +95,25 @@ export class CircularSlider extends React.Component<
     this.processSelection(x, y);
   };
 
+  onTouch = (ev: React.TouchEvent<SVGSVGElement>) => {
+    /* This is a very simplistic touch handler. Some optimzations might be:
+        - Right now, the bounding box for a touch is the entire element. Having the bounding box
+          for touched be circular at a fixed distance around the slider would be more intuitive.
+        - Similarly, don't set `touchAction: 'none'` in CSS. Instead, call `ev.preventDefault()`
+          only when the touch is within X distance from the slider
+    */
+    if (
+      ev.touches.length > 1 ||
+      (ev.type === "touchend" && ev.touches.length > 0)
+    )
+      return;
+
+    const touch = ev.changedTouches[0];
+    const x = touch.clientX;
+    const y = touch.clientY;
+    this.processSelection(x, y);
+  };
+
   processSelection = (x: number, y: number) => {
     const {
       size,
@@ -213,6 +232,10 @@ export class CircularSlider extends React.Component<
           if we propagate the click. */
           (ev) => controllable && ev.stopPropagation()
         }
+        onTouchStart={this.onTouch}
+        onTouchEnd={this.onTouch}
+        onTouchMove={this.onTouch}
+        style={{ touchAction: "none" }}
       >
         {
           /* Shadow */
