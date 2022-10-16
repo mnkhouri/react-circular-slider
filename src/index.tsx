@@ -70,17 +70,17 @@ export class CircularSlider extends React.Component<
   onMouseDown = (ev: React.MouseEvent<SVGSVGElement>) => {
     const svgRef = this.svgRef.current;
     if (svgRef) {
-      svgRef.addEventListener("mousemove", this.processSelection);
+      svgRef.addEventListener("mousemove", this.handleMousePosition);
       svgRef.addEventListener("mouseleave", this.removeMouseListeners);
       svgRef.addEventListener("mouseup", this.removeMouseListeners);
     }
-    this.processSelection(ev);
+    this.handleMousePosition(ev);
   };
 
   removeMouseListeners = () => {
     const svgRef = this.svgRef.current;
     if (svgRef) {
-      svgRef.removeEventListener("mousemove", this.processSelection);
+      svgRef.removeEventListener("mousemove", this.handleMousePosition);
       svgRef.removeEventListener("mouseleave", this.removeMouseListeners);
       svgRef.removeEventListener("mouseup", this.removeMouseListeners);
     }
@@ -89,7 +89,13 @@ export class CircularSlider extends React.Component<
     }
   };
 
-  processSelection = (ev: React.MouseEvent<SVGSVGElement> | MouseEvent) => {
+  handleMousePosition = (ev: React.MouseEvent<SVGSVGElement> | MouseEvent) => {
+    const x = ev.clientX;
+    const y = ev.clientY;
+    this.processSelection(x, y);
+  };
+
+  processSelection = (x: number, y: number) => {
     const {
       size,
       maxValue,
@@ -112,8 +118,6 @@ export class CircularSlider extends React.Component<
     }
     // Find the coordinates with respect to the SVG
     const svgPoint = svgRef.createSVGPoint();
-    const x = ev.clientX;
-    const y = ev.clientY;
     svgPoint.x = x;
     svgPoint.y = y;
     const coordsInSvg = svgPoint.matrixTransform(
