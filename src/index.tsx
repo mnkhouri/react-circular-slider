@@ -117,7 +117,7 @@ export class CircularSlider extends React.Component<
     svgPoint.x = x;
     svgPoint.y = y;
     const coordsInSvg = svgPoint.matrixTransform(
-      svgRef.getScreenCTM()!.inverse()
+      svgRef.getScreenCTM()?.inverse()
     );
 
     const angle = positionToAngle(coordsInSvg, size, angleType);
