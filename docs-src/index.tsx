@@ -1,7 +1,9 @@
 import { default as React, useState } from "react";
 import ReactDOM from "react-dom";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import { prism as syntaxStyle } from "react-syntax-highlighter/dist/esm/styles/prism";
+SyntaxHighlighter.registerLanguage("tsx", tsx);
 
 import { CircularSlider, CircularSliderWithChildren } from "../src";
 

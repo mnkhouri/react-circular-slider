@@ -32,7 +32,10 @@ module.exports = {
   },
   devServer: {
     client: {
-      overlay: true,
-    },
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    }
   }
 };

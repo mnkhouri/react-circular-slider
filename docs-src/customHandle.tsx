@@ -1,5 +1,5 @@
 import { default as React, useState } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { prism as syntaxStyle } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { CircularSlider, CircularSliderWithChildren } from "../src";
