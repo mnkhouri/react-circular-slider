@@ -10,6 +10,7 @@ import { CircularSlider, CircularSliderWithChildren } from "../src";
 import { ApiDocs } from "./api";
 import { OnControlFinishedExample } from "./onControlFinished";
 import { WithChildrenExample } from "./withChildren";
+import { StopCrossoverExample } from "./stopCrossover";
 
 class Main extends React.Component {
   render() {
@@ -41,6 +42,11 @@ class Main extends React.Component {
         onMouseLeave). You could use this callback, for example, to write the
         final value of the control to a database.
         <OnControlFinishedExample />
+        <h3>Prevent the slider from crossing the start point</h3>
+        If you want to stop the slider from moving between 0% and 100% (and vice
+        versa), you can use some additional logic within the "onChange"
+        function.
+        <StopCrossoverExample />
       </div>
     );
   }
