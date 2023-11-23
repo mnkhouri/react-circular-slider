@@ -10,6 +10,13 @@ export const ApiDocs: React.FunctionComponent = () => {
       description: "Width and height of slider",
     },
     {
+      name: "width",
+      required: false,
+      default: "4",
+      type: "number",
+      description: "Width of the track",
+    },
+    {
       name: "handle1",
       required: true,
       default: "",
