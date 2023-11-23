@@ -22,7 +22,8 @@
     "postpublish": "PACKAGE_VERSION=$(echo 'const p = require(\"./package.json\"); process.stdout.write(p.version)' | node) && git tag v$PACKAGE_VERSION && git push --tags",
     "test": "eslint src/** && prettier --check src/**",
     "build": "rm -rf ./dist ./docs && prettier --write src/** docs-src/** && webpack && tsc",
-    "watch-docs": "webpack serve"
+    "watch-docs": "webpack serve",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
