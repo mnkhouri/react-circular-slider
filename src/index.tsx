@@ -102,16 +102,29 @@ export class CircularSlider extends React.Component<
         - Similarly, don't set `touchAction: 'none'` in CSS. Instead, call `ev.preventDefault()`
           only when the touch is within X distance from the slider
     */
+
+    // This simple touch handler can't handle multiple touches. Therefore, bail if there are either:
+    // - more than 1 touches currently active
+    // - a touchEnd event, but there is still another touch active
     if (
       ev.touches.length > 1 ||
       (ev.type === "touchend" && ev.touches.length > 0)
-    )
+    ) {
       return;
+    }
 
+    // Process the new position
     const touch = ev.changedTouches[0];
     const x = touch.clientX;
     const y = touch.clientY;
     this.processSelection(x, y);
+
+    // If the touch is ending, fire onControlFinished
+    if (ev.type === "touchend" || ev.type === "touchcancel") {
+      if (this.props.onControlFinished) {
+        this.props.onControlFinished();
+      }
+    }
   };
 
   processSelection = (x: number, y: number) => {
@@ -235,6 +248,7 @@ export class CircularSlider extends React.Component<
         onTouchStart={this.onTouch}
         onTouchEnd={this.onTouch}
         onTouchMove={this.onTouch}
+        onTouchCancel={this.onTouch}
         style={{ touchAction: "none" }}
       >
         {
