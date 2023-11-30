@@ -25,7 +25,7 @@ export default () => {
   return (
     <CircularSlider
       size={200}
-      width={4}
+      trackWidth={4}
       minValue={0}
       maxValue={100}
       startAngle={40}

@@ -10,7 +10,7 @@ export const ApiDocs: React.FunctionComponent = () => {
       description: "Width and height of slider",
     },
     {
-      name: "width",
+      name: "trackWidth",
       required: false,
       default: "4",
       type: "number",
