@@ -10,6 +10,7 @@ import { arcPathWithRoundedEnds } from "./svgPaths";
 
 type Props = {
   size: number;
+  trackWidth: number;
   minValue: number;
   maxValue: number;
   startAngle: number; // 0 - 360 degrees
@@ -38,6 +39,7 @@ export class CircularSlider extends React.Component<
   static defaultProps: Pick<
     Props,
     | "size"
+    | "trackWidth"
     | "minValue"
     | "maxValue"
     | "startAngle"
@@ -47,6 +49,7 @@ export class CircularSlider extends React.Component<
     | "handleSize"
   > = {
     size: 200,
+    trackWidth: 4,
     minValue: 0,
     maxValue: 100,
     startAngle: 0,
@@ -185,6 +188,7 @@ export class CircularSlider extends React.Component<
   render() {
     const {
       size,
+      trackWidth,
       handle1,
       handle2,
       handleSize,
@@ -198,7 +202,6 @@ export class CircularSlider extends React.Component<
       arcBackgroundColor,
       outerShadow,
     } = this.props;
-    const trackWidth = 4;
     const shadowWidth = 20;
     const trackInnerRadius = size / 2 - trackWidth - shadowWidth;
     const handle1Angle = valueToAngle({
