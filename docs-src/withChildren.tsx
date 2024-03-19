@@ -28,7 +28,7 @@ export const WithChildrenExample: React.FunctionComponent = () => {
         <MyApp />
       </div>
       <SyntaxHighlighter language="tsx" style={syntaxStyle}>
-        {`  import CircularSliderWithChildren from 'react-circular-slider-svg';
+        {`  import { CircularSliderWithChildren } from 'react-circular-slider-svg';
 
   const MyApp: React.FunctionComponent = () => {
     const [value1, setValue1] = useState(20);
