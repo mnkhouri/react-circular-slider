@@ -28,9 +28,14 @@ type Props = {
   onControlFinished?: () => void;
   disabled?: boolean;
   arcColor: string;
+  arcSecondaryColor: string;
   arcBackgroundColor: string;
   coerceToInt?: boolean;
   outerShadow?: boolean;
+  handleStrokeColor?: string;
+  handleColor?: string;
+  handleStrokeWidth?: string;
+  svgDefs?: React.ReactNode;
 };
 
 export class CircularSlider extends React.Component<
@@ -45,22 +50,26 @@ export class CircularSlider extends React.Component<
     | "startAngle"
     | "endAngle"
     | "angleType"
+    | "arcSecondaryColor"
     | "arcBackgroundColor"
     | "handleSize"
+    | "handleColor"
   > = {
-    size: 200,
-    trackWidth: 4,
-    minValue: 0,
-    maxValue: 100,
-    startAngle: 0,
-    endAngle: 360,
-    angleType: {
-      direction: "cw",
-      axis: "-y",
-    },
-    handleSize: 8,
-    arcBackgroundColor: "#aaa",
-  };
+      size: 200,
+      trackWidth: 4,
+      minValue: 0,
+      maxValue: 100,
+      startAngle: 0,
+      endAngle: 360,
+      angleType: {
+        direction: "cw",
+        axis: "-y",
+      },
+      handleSize: 8,
+      arcSecondaryColor: "#aaa",
+      arcBackgroundColor: "#FFFFFF",
+      handleColor: "#FFFFFF"
+    };
   svgRef = React.createRef<SVGSVGElement>();
 
   onMouseEnter = (ev: React.MouseEvent<SVGSVGElement>) => {
@@ -199,8 +208,13 @@ export class CircularSlider extends React.Component<
       angleType,
       disabled,
       arcColor,
+      arcSecondaryColor,
       arcBackgroundColor,
       outerShadow,
+      handleColor,
+      handleStrokeColor,
+      handleStrokeWidth,
+      svgDefs
     } = this.props;
     const shadowWidth = 20;
     const trackInnerRadius = size / 2 - trackWidth - shadowWidth;
@@ -279,6 +293,22 @@ export class CircularSlider extends React.Component<
         {handle2Angle === undefined ? (
           /* One-handle mode */
           <React.Fragment>
+            {/* Arc Background Primary  */}
+            {svgDefs && <defs>
+              {svgDefs}
+            </defs>}
+            <path
+              d={arcPathWithRoundedEnds({
+                startAngle,
+                endAngle,
+                angleType,
+                innerRadius: trackInnerRadius,
+                thickness: trackWidth,
+                svgSize: size,
+                direction: angleType.direction,
+              })}
+              fill={arcBackgroundColor}
+            />
             {/* Arc Background  */}
             <path
               d={arcPathWithRoundedEnds({
@@ -290,7 +320,7 @@ export class CircularSlider extends React.Component<
                 svgSize: size,
                 direction: angleType.direction,
               })}
-              fill={arcBackgroundColor}
+              fill={arcSecondaryColor}
             />
             {/* Arc (render after background so it overlays it) */}
             <path
@@ -320,7 +350,7 @@ export class CircularSlider extends React.Component<
                 svgSize: size,
                 direction: angleType.direction,
               })}
-              fill={arcBackgroundColor}
+              fill={arcSecondaryColor}
             />
             {/* Arc Background Part 2  */}
             <path
@@ -333,7 +363,7 @@ export class CircularSlider extends React.Component<
                 svgSize: size,
                 direction: angleType.direction,
               })}
-              fill={arcBackgroundColor}
+              fill={arcSecondaryColor}
             />
             {/* Arc (render after background so it overlays it) */}
             <path
@@ -380,8 +410,10 @@ export class CircularSlider extends React.Component<
                 r={handleSize}
                 cx={handle1Position.x}
                 cy={handle1Position.y}
-                fill="#ffffff"
+                fill={handleColor}
                 filter="url(#handleShadow)"
+                stroke={handleStrokeColor}
+                strokeWidth={handleStrokeWidth}
               />
             </React.Fragment>
           )
@@ -395,8 +427,10 @@ export class CircularSlider extends React.Component<
                 r={handleSize}
                 cx={handle2Position.x}
                 cy={handle2Position.y}
-                fill="#ffffff"
+                fill={handleColor}
                 filter="url(#handleShadow)"
+                stroke={handleStrokeColor}
+                strokeWidth={handleStrokeWidth}
               />
             </React.Fragment>
           )
