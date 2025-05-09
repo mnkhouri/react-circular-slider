@@ -20,16 +20,16 @@ type Props = {
   handle1: {
     value: number;
     onChange?: (value: number) => void;
+    color?: string;
   };
   handle2?: {
     value: number;
     onChange: (value: number) => void;
+    color?: string;
   };
   onControlFinished?: () => void;
   disabled?: boolean;
   arcColor: string;
-  handleColor1?: string;
-  handleColor2?: string;
   arcBackgroundColor: string;
   coerceToInt?: boolean;
   outerShadow?: boolean;
@@ -201,8 +201,6 @@ export class CircularSlider extends React.Component<
       angleType,
       disabled,
       arcColor,
-      handleColor1,
-      handleColor2,
       arcBackgroundColor,
       outerShadow,
     } = this.props;
@@ -384,7 +382,7 @@ export class CircularSlider extends React.Component<
                 r={handleSize}
                 cx={handle1Position.x}
                 cy={handle1Position.y}
-                fill={handleColor1 ?? "#ffffff"}
+                fill={handle1.color ?? "#ffffff"}
                 filter="url(#handleShadow)"
               />
             </React.Fragment>
@@ -399,7 +397,7 @@ export class CircularSlider extends React.Component<
                 r={handleSize}
                 cx={handle2Position.x}
                 cy={handle2Position.y}
-                fill={handleColor2 ?? "#ffffff"}
+                fill={handle2.color ?? "#ffffff"}
                 filter="url(#handleShadow)"
               />
             </React.Fragment>
