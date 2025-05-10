@@ -23,6 +23,7 @@ export const ApiDocs: React.FunctionComponent = () => {
       type: {
         value: "number",
         onChange: "(v: number) => void",
+        "color?": "color",
       },
       description: "",
     },
@@ -33,6 +34,7 @@ export const ApiDocs: React.FunctionComponent = () => {
       type: {
         value: "number",
         onChange: "(v: number) => void",
+        "color?": "color",
       },
       description: "",
     },

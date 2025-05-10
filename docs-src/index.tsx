@@ -31,6 +31,10 @@ class Main extends React.Component {
             title="Start angle: 120, end angle: 300"
             opts={{ startAngle: 120, endAngle: 300 }}
           />
+          <Example
+            title="Handle 1 color #800080"
+            handleOpts={{ color: "#800080" }}
+          />
         </div>
         <h3>Nest children inside the slider:</h3>
         You can use "CircularSliderWithChildren" to nest children inside the
@@ -108,18 +112,23 @@ const MyApp = () => {
 };
 
 type SliderProps = React.ComponentProps<typeof CircularSliderWithChildren>;
-type ExampleProps = { opts?: Partial<SliderProps>; title: string };
+type ExampleProps = {
+  opts?: Partial<SliderProps>;
+  handleOpts?: Partial<{ color: string }>;
+  title: string;
+};
 const Example: React.FunctionComponent<ExampleProps> = (props) => {
   const [value1, setValue1] = useState(20);
   const [value2, setValue2] = useState(60);
   const [showConfig, setShowConfig] = useState(false);
-  const { opts, title } = props;
+  const { opts, handleOpts, title } = props;
   const config = {
     arcColor: "#690",
     ...opts,
     handle1: {
       value: value1,
       onChange: (v: number) => setValue1(v),
+      ...handleOpts,
     },
   };
 
