@@ -14,7 +14,7 @@ export const StopCrossoverExample: React.FunctionComponent = () => {
     const setValue1WithLimits = (
       currentValue: number,
       newValue: number,
-      limit: number
+      limit: number,
     ) => {
       if (newValue > currentValue + limit) {
         // the handle is probably crossing over from 0% -> 100%, don't move it

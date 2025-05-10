@@ -51,7 +51,7 @@ export type AngleWithDescription = {
 function convertAngle(
   degree: number,
   from: AngleDescription,
-  to?: AngleDescription
+  to?: AngleDescription,
 ) {
   to = to || { direction: "ccw", axis: "+x" };
 
@@ -97,7 +97,7 @@ function convertAngle(
 export function angleToPosition(
   angle: AngleWithDescription,
   radius: number,
-  svgSize: number
+  svgSize: number,
 ) {
   // js functions need radians, counterclockwise from positive x axis
   const angleConverted = convertAngle(angle.degree, angle, {
@@ -139,7 +139,7 @@ export function angleToPosition(
 export function positionToAngle(
   position: { x: number; y: number },
   svgSize: number,
-  angleType: AngleDescription
+  angleType: AngleDescription,
 ) {
   const dX = position.x - svgSize / 2;
   const dY = svgSize / 2 - position.y; // position.y increases downwards in svg
@@ -154,7 +154,7 @@ export function positionToAngle(
       direction: "ccw",
       axis: "+x",
     },
-    angleType
+    angleType,
   );
 }
 
@@ -170,12 +170,12 @@ export function semiCircle(opts: {
   const startPosition = angleToPosition(
     { degree: startAngle, ...angleType },
     radius,
-    svgSize
+    svgSize,
   );
   const endPosition = angleToPosition(
     { degree: endAngle, ...angleType },
     radius,
-    svgSize
+    svgSize,
   );
   return `
     M ${svgSize / 2},${svgSize / 2}

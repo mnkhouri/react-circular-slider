@@ -1,5 +1,5 @@
 import { default as React, useState } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import { prism as syntaxStyle } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -147,5 +147,11 @@ const Example: React.FunctionComponent<ExampleProps> = (props) => {
   );
 };
 
-const domContainer = document.querySelector("#main");
-ReactDOM.render(<Main />, domContainer);
+const root = ReactDOM.createRoot(
+  document.querySelector("#main") as HTMLElement,
+);
+root.render(
+  <React.StrictMode>
+    <Main />
+  </React.StrictMode>,
+);

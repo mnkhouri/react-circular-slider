@@ -158,7 +158,7 @@ export class CircularSlider extends React.Component<
     svgPoint.x = x;
     svgPoint.y = y;
     const coordsInSvg = svgPoint.matrixTransform(
-      svgRef.getScreenCTM()?.inverse()
+      svgRef.getScreenCTM()?.inverse(),
     );
 
     const angle = positionToAngle(coordsInSvg, size, angleType);
@@ -225,14 +225,14 @@ export class CircularSlider extends React.Component<
     const handle1Position = angleToPosition(
       { degree: handle1Angle, ...angleType },
       trackInnerRadius + trackWidth / 2,
-      size
+      size,
     );
     const handle2Position =
       handle2Angle &&
       angleToPosition(
         { degree: handle2Angle, ...angleType },
         trackInnerRadius + trackWidth / 2,
-        size
+        size,
       );
 
     const controllable = !disabled && Boolean(handle1.onChange);

@@ -19,12 +19,12 @@ function getStartAndEndPosition(opts: {
   const startPosition = angleToPosition(
     { degree: startAngle, ...angleType },
     radius,
-    svgSize
+    svgSize,
   );
   const endPosition = angleToPosition(
     { degree: isCircle ? endAngle - 0.001 : endAngle, ...angleType },
     radius,
-    svgSize
+    svgSize,
   );
 
   return { startPosition, endPosition, isCircle };
@@ -96,7 +96,7 @@ export function arcPathWithRoundedEnds(opts: {
   const innerArcStart = angleToPosition(
     { degree: startAngle, ...angleType },
     innerRadius,
-    svgSize
+    svgSize,
   );
   const startPoint = `
     M ${innerArcStart.x},${innerArcStart.y}
@@ -105,7 +105,7 @@ export function arcPathWithRoundedEnds(opts: {
   const innerArcEnd = angleToPosition(
     { degree: endAngle, ...angleType },
     innerRadius,
-    svgSize
+    svgSize,
   );
   const innerArc = `
     A ${innerRadius} ${innerRadius} 0
@@ -117,7 +117,7 @@ export function arcPathWithRoundedEnds(opts: {
   const outerArcStart = angleToPosition(
     { degree: endAngle, ...angleType },
     outerRadius,
-    svgSize
+    svgSize,
   );
   const firstButt = `
     A ${thickness / 2} ${thickness / 2} 0
@@ -129,7 +129,7 @@ export function arcPathWithRoundedEnds(opts: {
   const outerArcEnd = angleToPosition(
     { degree: startAngle, ...angleType },
     outerRadius,
-    svgSize
+    svgSize,
   );
   const outerArc = `
     A ${outerRadius} ${outerRadius} 0
